@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1323.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geneticalgorithm.Controller">
+   <children>
+      <Button fx:id="solutionButton" layoutX="216.0" layoutY="641.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="123.0" text="Посчитать" />
+      <TextField fx:id="populationSizeTextField" layoutX="27.0" layoutY="30.0" prefHeight="25.0" prefWidth="149.0" promptText="Количество поколений" text="100" />
+      <TextField fx:id="accuracyTextField" layoutX="27.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" promptText="Точность вычисления" text="0.0000000000000001" />
+      <TextField fx:id="crossoverRateTextField" layoutX="27.0" layoutY="64.0" prefHeight="25.0" prefWidth="149.0" promptText="от 0 до 1.0" text="0.9" />
+      <TextField fx:id="mutationRateTextField" layoutX="27.0" layoutY="98.0" prefHeight="25.0" prefWidth="149.0" promptText="от 0 до 1.0" text="0.3" />
+      <TextField fx:id="maxIterationsTextField" layoutX="27.0" layoutY="132.0" prefHeight="25.0" prefWidth="149.0" promptText="макс. кол-во итераций алгоритма" text="100" />
+      <TextField fx:id="maxIterationsWithoutImprovementTextField" layoutX="27.0" layoutY="167.0" prefHeight="25.0" prefWidth="149.0" promptText="Максимальное количество итераций без изменения результата" text="30000" />
+      <Text layoutX="186.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество особей в популяции" wrappingWidth="182.13671875" />
+      <Text layoutX="186.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Точность вычисления" wrappingWidth="182.13671875" />
+      <Text layoutX="186.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность скрещивания" wrappingWidth="182.13671875" />
+      <Text layoutX="186.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность мутации" wrappingWidth="182.13671875" />
+      <Text layoutX="186.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество поколений" wrappingWidth="268.13671875" />
+      <Text layoutX="186.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество итераций без изменения результата" wrappingWidth="259.13671875" />
+      <LineChart fx:id="resultChart" layoutX="445.0" layoutY="39.0" prefHeight="685.0" prefWidth="858.0">
+        <xAxis>
+          <CategoryAxis fx:id="iterations" prefHeight="36.0" prefWidth="662.0" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="fitness" label="Приспособленность" prefHeight="514.0" prefWidth="49.0" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Text layoutX="735.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="График оптимального значения функции" textAlignment="CENTER" wrappingWidth="277.13671875" />
+       <ChoiceBox fx:id="findMinSelector" layoutX="27.0" layoutY="236.0" prefHeight="25.0" prefWidth="73.0" value="Min">
+           <items>
+           <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Min" />
+           <String fx:value="Max" />
+           </FXCollections>
+           </items>
+       </ChoiceBox>
+
+
+      <Text layoutX="115.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Экстремум" wrappingWidth="182.13671875" />
+      <Label fx:id="resultLabel" layoutX="29.0" layoutY="288.0" prefHeight="235.0" prefWidth="399.0" />
+   </children>
+</AnchorPane>
