@@ -1,4 +1,5 @@
-package com.geneticalgorithm;//import javax.lang.model.type.NullType;
+package com.geneticsoftware.util;//import javax.lang.model.type.NullType;
+
 import java.math.BigInteger;
 
 public class BinaryString {
@@ -66,75 +67,75 @@ public class BinaryString {
     // Функция для преобразования строки с двоичным представлением в число типа double
     public double[] binaryStringToDouble() {
         double[] doubles = new double[binaryString.length() / 64];
-//        for(int i = 0; i < doubles.length; i++) {
-//            Pair<String, String> tmp = split(64);
-//            long bits = Long.parseLong(binaryString, 2);
-//            doubles[i] = Double.longBitsToDouble(bits);
-//        }
 
-        //!!!!!!!!!!!!!!!!!!!!!! только для функции с 2 аргументами
-        String[] tmp = splitForPieces(64);
-//        long bits1 = Long.parseLong(tmp.getFirst(), 2);
-//        doubles[0] = Double.longBitsToDouble(bits1);
-//        long bits2 = Long.parseLong(tmp.getSecond(), 2);
-//        doubles[1] = Double.longBitsToDouble(bits2);
-
-//        long bits1 = 0;
-//        for (int i = 0; i < 64; i++) {
-//            char c = tmp.getFirst().charAt(i);
-//            if (c == '1') {
-//                bits1 |= 1L << (63 - i); // Устанавливаем соответствующий бит
-//            }
-//        }
-//        doubles[0] =  Double.longBitsToDouble(bits1);
-//
-//        long bits2 = 0;
-//        for (int i = 0; i < 64; i++) {
-//            char c = tmp.getSecond().charAt(i);
-//            if (c == '1') {
-//                bits2 |= 1L << (63 - i); // Устанавливаем соответствующий бит
-//            }
-//        }
-//        doubles[1] =  Double.longBitsToDouble(bits2);
+        BinaryString[] tmp = splitForPiecesBySize(64);
 
         for (int i = 0; i < tmp.length; i++){
-            doubles[i] = Double.longBitsToDouble(new BigInteger(tmp[i], 2).longValue());
+            doubles[i] = Double.longBitsToDouble(new BigInteger(tmp[i].getBinaryString(), 2).longValue());
         }
-
-
 
         return doubles;
     }
 
     public Pair<String, String> split(int splitIndex){
         return new Pair<String, String>(binaryString.substring(0, splitIndex), binaryString.substring(splitIndex));
-//        res.setFirst(); // Получение первой части строки
-//        res.setSecond(binaryString.substring(splitIndex)); // Получение второй части строки
-//        res;
     }
 
-    public String[] splitForPieces(int pieceSize){
-        String[] res = new String[binaryString.length() / pieceSize];
+    public BinaryString[] splitForPiecesBySize(int pieceSize){
+        BinaryString[] res = new BinaryString[binaryString.length() / pieceSize];
         int i = 0, j = 0;
         for (; i < res.length - 1; i++, j += pieceSize){
-            res[i] = binaryString.substring(j, j + pieceSize);
+            res[i] = new BinaryString(binaryString.substring(j, j + pieceSize));
         }
-        res[i] = binaryString.substring(j);
+        res[i] = new BinaryString(binaryString.substring(j));
         return res;
-//        res.setFirst(); // Получение первой части строки
-//        res.setSecond(binaryString.substring(splitIndex)); // Получение второй части строки
-//        res;
+    }
+
+    public BinaryString[] splitForPiecesByCount(int pieceCount){
+        BinaryString[] res = new BinaryString[pieceCount];
+        int pieceSize = this.getLength() / pieceCount;
+        int i = 0, j = 0;
+        for (; i < res.length - 1; i++, j += pieceSize){
+            res[i] = new BinaryString(binaryString.substring(j, j + pieceSize));
+        }
+        res[i] = new BinaryString(binaryString.substring(j));
+        return res;
     }
 
     public static Pair<BinaryString, BinaryString> splitAndSwap(BinaryString first, BinaryString second, int splitIndex){
         Pair<String, String> tmp1 = first.split(splitIndex);
         Pair<String, String> tmp2 = second.split(splitIndex);
-        return new Pair<BinaryString, BinaryString>(new BinaryString(tmp1.getFirst() + tmp2.getSecond()), new BinaryString(tmp2.getFirst() + tmp1.getSecond()));
+
+        Pair<BinaryString, BinaryString> res = new Pair<BinaryString, BinaryString>(new BinaryString(tmp1.getFirst() + tmp2.getSecond()), new BinaryString(tmp2.getFirst() + tmp1.getSecond()));
+        return res;
     }
 
     public void setBit(char bit, int idx){
         StringBuilder stringBuilder = new StringBuilder(binaryString);
         stringBuilder.setCharAt(idx, bit);
         binaryString = stringBuilder.toString();
+    }
+
+    public void add(BinaryString a){
+        this.binaryString += a.getBinaryString();
+    }
+
+    public void add(String a){
+        this.binaryString += a;
+    }
+
+    @Override
+    public String toString() {
+
+        String res = "";
+        if (binaryString.length() == 128) {
+
+            BinaryString[] arguments = this.splitForPiecesBySize(64);
+            for (int i = 0; i < arguments.length; i++) {
+                res += "x" + (i + 1) + " = " + arguments[i].binaryStringToDouble()[0] + "\n";
+            }
+
+        }
+        return res;
     }
 }
