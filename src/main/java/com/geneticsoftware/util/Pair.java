@@ -1,4 +1,4 @@
-package com.geneticalgorithm;
+package com.geneticsoftware.util;
 
 public class Pair<T, U> implements Cloneable, java.io.Serializable {
     private T first;
@@ -27,7 +27,6 @@ public class Pair<T, U> implements Cloneable, java.io.Serializable {
     public void setSecond(U second) {
         this.second = second;
     }
-
     public static <T, U> Pair<T, U> of(T a, U b) {
         return new Pair<>(a, b);
     }

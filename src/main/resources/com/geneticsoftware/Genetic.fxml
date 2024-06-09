@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="810.0" maxWidth="1340.0" minHeight="794.0" minWidth="1324.0" prefHeight="810.0" prefWidth="1420.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geneticsoftware.gui.GeneticController">
+   <children>
+      <TextField fx:id="populationSizeTextField" layoutX="34.0" layoutY="63.0" prefHeight="25.0" prefWidth="149.0" promptText="Количество поколений" text="100" />
+      <ChoiceBox fx:id="chromosomeSelector" layoutX="35.0" layoutY="99.0" prefHeight="25.0" prefWidth="149.0" value="Бинарное кодирование">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Бинарное кодирование" />
+               <String fx:value="Вещественные числа" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <TextField fx:id="countChromosomesTextField" layoutX="35.0" layoutY="138.0" prefHeight="25.0" prefWidth="149.0" promptText="Количество хромосом" text="1" />
+      <TextField fx:id="crossoverRateTextField" layoutX="35.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" promptText="от 0 до 1.0" text="0.9" />
+      <TextField fx:id="mutationRateTextField" layoutX="35.0" layoutY="206.0" prefHeight="25.0" prefWidth="149.0" promptText="от 0 до 1.0" text="0.1" />
+      <TextField fx:id="maxIterationsTextField" layoutX="35.0" layoutY="244.0" prefHeight="25.0" prefWidth="149.0" promptText="макс. кол-во итераций алгоритма" text="1000" />
+      <TextField fx:id="maxIterationsWithoutImprovementTextField" layoutX="35.0" layoutY="280.0" prefHeight="25.0" prefWidth="149.0" promptText="Максимальное количество итераций без изменения результата" text="1000" />
+      <Text layoutX="191.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество особей в популяции" wrappingWidth="182.13671875" />
+      <Text layoutX="192.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество хромосом у особей" wrappingWidth="182.13671875" />
+      <Text layoutX="190.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность скрещивания" wrappingWidth="182.13671875" />
+      <Text layoutX="191.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность мутации" wrappingWidth="182.13671875" />
+      <Text layoutX="193.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество поколений" wrappingWidth="268.13671875" />
+      <Text layoutX="191.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество итераций без изменения результата" wrappingWidth="259.13671875" />
+      <LineChart fx:id="resultChart" animated="false" layoutX="450.0" layoutY="51.0" prefHeight="690.0" prefWidth="869.0">
+        <xAxis>
+          <CategoryAxis fx:id="iterations" label="Поколения" prefHeight="37.0" prefWidth="785.0" side="BOTTOM">
+               <tickLabelFont>
+                  <Font size="11.0" />
+               </tickLabelFont></CategoryAxis>
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="fitness" label="Лучшее решение" prefHeight="618.0" prefWidth="50.0" side="LEFT">
+               <tickLabelFont>
+                  <Font size="11.0" />
+               </tickLabelFont></NumberAxis>
+        </yAxis>
+      </LineChart>
+      <Text layoutX="689.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="График изменения лучшего решения" textAlignment="CENTER" wrappingWidth="442.13671875">
+         <font>
+            <Font size="22.0" />
+         </font></Text>
+       <ChoiceBox fx:id="findMinSelector" layoutX="35.0" layoutY="320.0" prefHeight="25.0" prefWidth="73.0" value="Min">
+           <items>
+           <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Min" />
+           <String fx:value="Max" />
+           </FXCollections>
+           </items>
+       </ChoiceBox>
+
+
+      <Text layoutX="122.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Экстремум" wrappingWidth="182.13671875" />
+      <Label fx:id="resultLabel" layoutX="28.0" layoutY="501.0" prefHeight="227.0" prefWidth="428.0">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Text layoutX="7.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Параметры генетического алгоритма" textAlignment="CENTER" wrappingWidth="442.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="selectionSelector" layoutX="35.0" layoutY="355.0" prefHeight="25.0" prefWidth="212.0" value="Турнирный отбор">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Колесо рулетки" />
+               <String fx:value="Ранжированный отбор" />
+                <String fx:value="Турнирный отбор" />
+                <String fx:value="Отбор усечением" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Text layoutX="264.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод селекции" wrappingWidth="107.13671875" />
+      <ChoiceBox fx:id="crossoverSelector" layoutX="35.0" layoutY="392.0" prefHeight="25.0" prefWidth="212.0" value="Двухточечное скрещивание">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Одноточечное скрещивание" />
+               <String fx:value="Двухточечное скрещивание" />
+                <String fx:value="k-точечное скрещивание" />
+                <String fx:value="Равномерное скрещивание" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Text layoutX="264.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод скрещивания" wrappingWidth="126.13671875" />
+      <ChoiceBox fx:id="mutationSelector" layoutX="35.0" layoutY="429.0" prefHeight="25.0" prefWidth="212.0" value="Инвертирование одного бита">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Инвертирование одного бита" />
+               <String fx:value="Инвертирование нескольких битов" />
+                <String fx:value="Обращение цепочки генов" />
+                <String fx:value="Случайное изменение цепочки генов" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Text layoutX="264.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод мутации" wrappingWidth="120.13671875" />
+      <Button fx:id="backButton" layoutX="43.0" layoutY="745.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" text="Изменить функцию" />
+      <Button fx:id="solutionButton" layoutX="241.0" layoutY="745.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" text="Посчитать" />
+      <Button fx:id="cleanButton" layoutX="840.0" layoutY="745.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" text="Очистить график" />
+      <Text layoutX="196.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Способ кодирования хромосом" wrappingWidth="212.13671875" />
+   </children>
+</AnchorPane>
