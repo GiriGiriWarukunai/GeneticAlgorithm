@@ -89,7 +89,7 @@ public class GeneticAlgorithm {
             case ROULETTEWHEEL -> selectionMethod = new SelectionRouletteWheel();
             case RANK -> selectionMethod = new SelectionRank();
             case TOURNAMENT -> selectionMethod = new SelectionTournament();
-            case TRUNCATION -> selectionMethod = new SelectionTrancation();
+//            case TRUNCATION -> selectionMethod = new SelectionTrancation();
         }
         switch (crossoverType){
             case ONEPOINT -> crossoverMethod = new CrossoverOnePoint();
@@ -103,8 +103,8 @@ public class GeneticAlgorithm {
         switch (mutationType){
             case ONEBITINVERTION -> mutationMethod = new MutationOneBitInvertion();
             case EVERYBITINVERTION -> mutationMethod = new MutationEveryBitInvertion();
-            case PARTINVERTATION -> mutationMethod = new MutationPartInvertion();
-            case PARTRANDOM -> mutationMethod = new MutationPartRandom();
+//            case PARTINVERTATION -> mutationMethod = new MutationPartInvertion();
+//            case PARTRANDOM -> mutationMethod = new MutationPartRandom();
             case ONEREAL -> mutationMethod = new MutationOneReal();
         }
 
