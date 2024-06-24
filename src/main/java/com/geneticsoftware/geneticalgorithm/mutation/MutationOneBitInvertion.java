@@ -67,4 +67,9 @@ public class MutationOneBitInvertion extends Mutation{
         return res;
 //        System.out.println("Популяция после мутации:" + toString());
     }
+
+    @Override
+    public Population mutation(Population population, double mutationRate, int first, int second) throws ScriptException {
+        return null;
+    }
 }

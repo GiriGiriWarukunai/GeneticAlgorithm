@@ -58,19 +58,20 @@ public class CrossoverUniform extends Crossover{
                         child1Chromosomes[j] = new Chromosome();
                         child2Chromosomes[j] = new Chromosome();
 
-                        Pair<StringBuilder, StringBuilder> tmp = new Pair<StringBuilder, StringBuilder>();
+                        StringBuilder tmp1 = new StringBuilder();
+                        StringBuilder tmp2 = new StringBuilder();
 
                         for (int k = 0; k < parent1.getChromosomes()[j].getBits().getLength(); k++) {
                             if (random.nextDouble() < alpha) {
-                                tmp.getFirst().append(parent2.getChromosomes()[j].getBits().getBinaryString().charAt(k));
-                                tmp.getSecond().append(parent1.getChromosomes()[j].getBits().getBinaryString().charAt(k));
+                                tmp1.append(parent2.getChromosomes()[j].getBits().getBinaryString().charAt(k));
+                                tmp2.append(parent1.getChromosomes()[j].getBits().getBinaryString().charAt(k));
                             } else {
-                                tmp.getFirst().append(parent1.getChromosomes()[j].getBits().getBinaryString().charAt(k));
-                                tmp.getSecond().append(parent2.getChromosomes()[j].getBits().getBinaryString().charAt(k));
+                                tmp1.append(parent1.getChromosomes()[j].getBits().getBinaryString().charAt(k));
+                                tmp2.append(parent2.getChromosomes()[j].getBits().getBinaryString().charAt(k));
                             }
                         }
-                        child1Chromosomes[j].setBits(new BinaryString(tmp.getFirst().toString()));
-                        child2Chromosomes[j].setBits(new BinaryString(tmp.getSecond().toString()));
+                        child1Chromosomes[j].setBits(new BinaryString(tmp1.toString()));
+                        child2Chromosomes[j].setBits(new BinaryString(tmp2.toString()));
 //                System.out.println("\nВременные потомки: \nx = " + child1.binaryStringToDouble()[0] + "\ny = " + child1.binaryStringToDouble()[1] +
 //                        "\n\nx = " + child2.binaryStringToDouble()[0] + "\ny = " + child2.binaryStringToDouble()[1]);
                     }

@@ -13,10 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="810.0" maxWidth="1340.0" minHeight="794.0" minWidth="1324.0" prefHeight="810.0" prefWidth="1420.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geneticsoftware.gui.GeneticController">
+<AnchorPane maxHeight="827.0" maxWidth="1340.0" minHeight="794.0" minWidth="1324.0" prefHeight="827.0" prefWidth="1340.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geneticsoftware.gui.GeneticController">
    <children>
-      <TextField fx:id="populationSizeTextField" layoutX="34.0" layoutY="63.0" prefHeight="25.0" prefWidth="149.0" promptText="Количество поколений" text="100" />
-      <ChoiceBox fx:id="chromosomeSelector" layoutX="35.0" layoutY="99.0" prefHeight="25.0" prefWidth="149.0" value="Бинарное кодирование">
+      <TextField fx:id="populationSizeTextField" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="182.0" promptText="Количество поколений" text="100">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <ChoiceBox fx:id="chromosomeSelector" layoutX="24.0" layoutY="104.0" prefHeight="25.0" prefWidth="182.0" value="Бинарное кодирование">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Бинарное кодирование" />
@@ -24,17 +28,55 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <TextField fx:id="countChromosomesTextField" layoutX="35.0" layoutY="138.0" prefHeight="25.0" prefWidth="149.0" promptText="Количество хромосом" text="1" />
-      <TextField fx:id="crossoverRateTextField" layoutX="35.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" promptText="от 0 до 1.0" text="0.9" />
-      <TextField fx:id="mutationRateTextField" layoutX="35.0" layoutY="206.0" prefHeight="25.0" prefWidth="149.0" promptText="от 0 до 1.0" text="0.1" />
-      <TextField fx:id="maxIterationsTextField" layoutX="35.0" layoutY="244.0" prefHeight="25.0" prefWidth="149.0" promptText="макс. кол-во итераций алгоритма" text="1000" />
-      <TextField fx:id="maxIterationsWithoutImprovementTextField" layoutX="35.0" layoutY="280.0" prefHeight="25.0" prefWidth="149.0" promptText="Максимальное количество итераций без изменения результата" text="1000" />
-      <Text layoutX="191.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество особей в популяции" wrappingWidth="182.13671875" />
-      <Text layoutX="192.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество хромосом у особей" wrappingWidth="182.13671875" />
-      <Text layoutX="190.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность скрещивания" wrappingWidth="182.13671875" />
-      <Text layoutX="191.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность мутации" wrappingWidth="182.13671875" />
-      <Text layoutX="193.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество поколений" wrappingWidth="268.13671875" />
-      <Text layoutX="191.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество итераций без изменения результата" wrappingWidth="259.13671875" />
+      <TextField fx:id="countChromosomesTextField" layoutX="24.0" layoutY="140.0" prefHeight="25.0" prefWidth="182.0" promptText="Количество хромосом" text="1">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="crossoverRateTextField" layoutX="24.0" layoutY="180.0" prefHeight="25.0" prefWidth="182.0" promptText="от 0 до 1.0" text="0.9">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="mutationRateTextField" layoutX="24.0" layoutY="220.0" prefHeight="25.0" prefWidth="182.0" promptText="от 0 до 1.0" text="0.1">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="maxIterationsTextField" layoutX="24.0" layoutY="261.0" prefHeight="25.0" prefWidth="182.0" promptText="макс. кол-во итераций алгоритма" text="1000">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="maxIterationsWithoutImprovementTextField" layoutX="24.0" layoutY="302.0" prefHeight="25.0" prefWidth="182.0" promptText="Максимальное количество итераций без изменения результата" text="1000">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Text layoutX="214.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество особей в популяции" wrappingWidth="245.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="214.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Количество хромосом у особей" wrappingWidth="245.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="214.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность скрещивания" wrappingWidth="259.0">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="215.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вероятность мутации" wrappingWidth="231.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="215.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество поколений" wrappingWidth="268.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="214.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Максимальное количество итераций без изменения результата" wrappingWidth="259.0">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
       <LineChart fx:id="resultChart" animated="false" layoutX="450.0" layoutY="51.0" prefHeight="690.0" prefWidth="869.0">
         <xAxis>
           <CategoryAxis fx:id="iterations" label="Поколения" prefHeight="37.0" prefWidth="785.0" side="BOTTOM">
@@ -43,17 +85,17 @@
                </tickLabelFont></CategoryAxis>
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="fitness" label="Лучшее решение" prefHeight="618.0" prefWidth="50.0" side="LEFT">
+          <NumberAxis fx:id="fitness" label="Найденное решение" prefHeight="618.0" prefWidth="50.0" side="LEFT">
                <tickLabelFont>
                   <Font size="11.0" />
                </tickLabelFont></NumberAxis>
         </yAxis>
       </LineChart>
-      <Text layoutX="689.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="График изменения лучшего решения" textAlignment="CENTER" wrappingWidth="442.13671875">
+      <Text layoutX="689.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="График изменения найденного решения" textAlignment="CENTER" wrappingWidth="442.13671875">
          <font>
             <Font size="22.0" />
          </font></Text>
-       <ChoiceBox fx:id="findMinSelector" layoutX="35.0" layoutY="320.0" prefHeight="25.0" prefWidth="73.0" value="Min">
+       <ChoiceBox fx:id="findMinSelector" layoutX="24.0" layoutY="341.0" prefHeight="25.0" prefWidth="73.0" value="Min">
            <items>
            <FXCollections fx:factory="observableArrayList">
                <String fx:value="Min" />
@@ -63,7 +105,10 @@
        </ChoiceBox>
 
 
-      <Text layoutX="122.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Экстремум" wrappingWidth="182.13671875" />
+      <Text layoutX="105.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Искомый экстремум" wrappingWidth="182.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
       <Label fx:id="resultLabel" layoutX="28.0" layoutY="501.0" prefHeight="227.0" prefWidth="428.0">
          <font>
             <Font size="16.0" />
@@ -73,7 +118,7 @@
             <Font size="22.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="selectionSelector" layoutX="35.0" layoutY="355.0" prefHeight="25.0" prefWidth="212.0" value="Турнирный отбор">
+      <ChoiceBox fx:id="selectionSelector" layoutX="24.0" layoutY="377.0" prefHeight="25.0" prefWidth="259.0" value="Турнирный отбор">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Колесо рулетки" />
@@ -83,8 +128,11 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Text layoutX="264.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод селекции" wrappingWidth="107.13671875" />
-      <ChoiceBox fx:id="crossoverSelector" layoutX="35.0" layoutY="392.0" prefHeight="25.0" prefWidth="212.0" value="Двухточечное скрещивание">
+      <Text layoutX="288.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод селекции" wrappingWidth="141.0">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <ChoiceBox fx:id="crossoverSelector" layoutX="24.0" layoutY="414.0" prefHeight="25.0" prefWidth="259.0" value="Двухточечное скрещивание">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Одноточечное скрещивание" />
@@ -94,8 +142,11 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Text layoutX="264.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод скрещивания" wrappingWidth="126.13671875" />
-      <ChoiceBox fx:id="mutationSelector" layoutX="35.0" layoutY="429.0" prefHeight="25.0" prefWidth="212.0" value="Инвертирование одного бита">
+      <Text layoutX="289.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод скрещивания" wrappingWidth="150.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <ChoiceBox fx:id="mutationSelector" layoutX="24.0" layoutY="450.0" prefHeight="25.0" prefWidth="259.0" value="Инвертирование одного бита">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Инвертирование одного бита" />
@@ -105,10 +156,40 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Text layoutX="264.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод мутации" wrappingWidth="120.13671875" />
-      <Button fx:id="backButton" layoutX="43.0" layoutY="745.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" text="Изменить функцию" />
-      <Button fx:id="solutionButton" layoutX="241.0" layoutY="745.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" text="Посчитать" />
-      <Button fx:id="cleanButton" layoutX="840.0" layoutY="745.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" text="Очистить график" />
-      <Text layoutX="196.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Способ кодирования хромосом" wrappingWidth="212.13671875" />
+      <Text layoutX="289.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Метод мутации" wrappingWidth="120.13671875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Button fx:id="backButton" layoutX="28.0" layoutY="750.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" text="Изменить функцию" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="solutionButton" layoutX="185.0" layoutY="750.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" text="Найти решение">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="cleanButton" layoutX="840.0" layoutY="750.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" text="Очистить график" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Text layoutX="214.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Способ кодирования хромосом" wrappingWidth="259.0">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <TextField fx:id="alphaTextField" layoutX="543.0" layoutY="732.0" prefHeight="25.0" prefWidth="73.0" promptText="Максимальное количество итераций без изменения результата" text="0.5" visible="false" />
+      <Text layoutX="627.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="alpha" visible="false" wrappingWidth="40.13671875" />
+      <TextField fx:id="kTextField" layoutX="543.0" layoutY="764.0" prefHeight="25.0" prefWidth="73.0" promptText="Максимальное количество итераций без изменения результата" visible="false" />
+      <Text layoutX="628.0" layoutY="781.0" strokeType="OUTSIDE" strokeWidth="0.0" text="k" visible="false" wrappingWidth="19.13671875" />
+      <TextField fx:id="sizeTextField" layoutX="679.0" layoutY="732.0" prefHeight="25.0" prefWidth="73.0" promptText="Максимальное количество итераций без изменения результата" visible="false" />
+      <Text layoutX="763.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="size" visible="false" wrappingWidth="40.13671875" />
+      <TextField fx:id="firstTextField" layoutX="1033.0" layoutY="733.0" prefHeight="25.0" prefWidth="73.0" promptText="Максимальное количество итераций без изменения результата" visible="false" />
+      <Text layoutX="1117.0" layoutY="751.0" strokeType="OUTSIDE" strokeWidth="0.0" text="first" visible="false" wrappingWidth="40.13671875" />
+      <TextField fx:id="secondTextField" layoutX="1033.0" layoutY="765.0" prefHeight="25.0" prefWidth="73.0" promptText="Максимальное количество итераций без изменения результата" visible="false" />
+      <Text layoutX="1117.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="second" visible="false" wrappingWidth="40.13671875" />
+      <Button fx:id="solutionButton1" layoutX="344.0" layoutY="750.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="141.0" text="Автоматический расчет" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

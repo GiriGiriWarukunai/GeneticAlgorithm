@@ -19,6 +19,9 @@ public class GeneticAlgorithm {
     private CrossoverType crossoverType; //Тип Скрещивания
     private double alpha;
     private int k;
+    private int first;
+    private int second;
+
     private MutationType mutationType;
     private Selection selectionMethod;
     private Crossover crossoverMethod;
@@ -46,7 +49,7 @@ public class GeneticAlgorithm {
     public GeneticAlgorithm(int populationSize, int countChromosomes, double accuracy, double crossoverRate, double mutationRate,
                             int maxIterations, int maxIterationsWithoutImprovement, boolean findMin,
                             ChromosomeType chromosomeType, SelectionType selectionType, CrossoverType crossoverType, MutationType mutationType,
-                            boolean elitist, FitnessFunction fitnessFunction, int size, double alpha, int k ) throws ScriptException {
+                            boolean elitist, FitnessFunction fitnessFunction, int size, double alpha, int k, int first, int second ) throws ScriptException {
         this.populationSize = populationSize;
         this.countChromosomes = countChromosomes;
         this.accuracy = accuracy;
@@ -59,6 +62,8 @@ public class GeneticAlgorithm {
         this.size = size;
         this.alpha = alpha;
         this.k = k;
+        this.first = first;
+        this.second = second;
 
         this.findMin = findMin;
         this.chromosomeType = chromosomeType;
@@ -109,16 +114,19 @@ public class GeneticAlgorithm {
 
         XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
 
-        System.out.println(population);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //System.out.println(population);
+
         bestIndividual = population.bestIndividual();
 
         if (findMin){
             series.getData().add(new XYChart.Data<String, Double>(Integer.toString(currentIteration), (-1)*currentBestFitness));
-            System.out.println((currentIteration ) + " текущее лучшее решение: " + -currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //System.out.println((currentIteration ) + " текущее лучшее решение: " + -currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
         }
         else{
             series.getData().add(new XYChart.Data<String, Double>(Integer.toString(currentIteration), currentBestFitness));
-            System.out.println((currentIteration ) + " текущее лучшее решение: " + currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!System.out.println((currentIteration ) + " текущее лучшее решение: " + currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
         }
 
 
@@ -126,14 +134,15 @@ public class GeneticAlgorithm {
 
             ArrayList<Individual> parents = new ArrayList<Individual>();
             if(selectionType == SelectionType.TOURNAMENT ||
-                    selectionType == SelectionType.RANK) {
+                    selectionType == SelectionType.RANK ||
+                    selectionType == SelectionType.ROULETTEWHEEL) {
                parents = selectionMethod.selection(population);
             }
             else if (selectionType == SelectionType.TRUNCATION){
                 parents = selectionMethod.selection(population, size);
             }
 
-           System.out.println("выбранные родители:\n" + parents.toString());
+          // System.out.println("выбранные родители:\n" + parents.toString());
 
            if(crossoverType == CrossoverType.ONEPOINT ||
                    crossoverType == CrossoverType.TWOPOINT) {
@@ -148,13 +157,21 @@ public class GeneticAlgorithm {
            else if (crossoverType == CrossoverType.KPOINT){
                population = crossoverMethod.crossover(parents, fitnessFunction, crossoverRate, k);
            }
-            System.out.println("Популяция после скрещивания\n" + population);
+           // System.out.println("Популяция после скрещивания\n" + population);
 
             if (mutationRate > 0) {
-                population = mutationMethod.mutation(population, mutationRate);
+                if (mutationType == MutationType.ONEBITINVERTION ||
+                        mutationType == MutationType.EVERYBITINVERTION ||
+                        mutationType == MutationType.ONEREAL) {
+                    population = mutationMethod.mutation(population, mutationRate);
+                }
+                else if (mutationType == MutationType.PARTINVERTATION ||
+                        mutationType == MutationType.PARTRANDOM){
+                    population = mutationMethod.mutation(population, mutationRate, first, second);
+                }
             }
 
-           System.out.println("Популяция после мутации\n" + population);
+         //  System.out.println("Популяция после мутации\n" + population);
 
             double currentFitness = population.bestFitness();
             if(currentFitness > currentBestFitness){
@@ -170,11 +187,11 @@ public class GeneticAlgorithm {
 
             if (findMin){
                 series.getData().add(new XYChart.Data<String, Double>(Integer.toString(currentIteration), -currentBestFitness));
-                System.out.println((currentIteration ) + " текущее лучшее решение: " + -currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
+//                System.out.println((currentIteration ) + " текущее лучшее решение: " + -currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
             }
             else{
                 series.getData().add(new XYChart.Data<String, Double>(Integer.toString(currentIteration), currentBestFitness));
-                System.out.println((currentIteration ) + " текущее лучшее решение: " + currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
+//               System.out.println((currentIteration ) + " текущее лучшее решение: " + currentBestFitness /*+ "\n" + population.bestIndividual()+ "\n"*/);
             }
 
         }
@@ -184,11 +201,11 @@ public class GeneticAlgorithm {
         Pair<String, XYChart.Series<String, Double>> result = new Pair<String, XYChart.Series<String, Double>>();
 
         if (findMin){
-            System.out.println("Количество поколений: " + currentIteration + "\n\nЛучшее решение = " + -currentBestFitness + "\n" + bestIndividual/*.invertValue()*/);
+//            System.out.println("Количество поколений: " + currentIteration + "\n\nЛучшее решение = " + -currentBestFitness + "\n" + bestIndividual/*.invertValue()*/);
             result.setFirst("Количество поколений: " + currentIteration + "\n\nЛучшее решение = " + -currentBestFitness + "\n" + bestIndividual/*.invertValue()*/);
         }
         else{
-            System.out.println("Количество поколений: " + currentIteration + "\n\nЛучшее решение = " + currentBestFitness + "\n" + bestIndividual);
+//            System.out.println("Количество поколений: " + currentIteration + "\n\nЛучшее решение = " + currentBestFitness + "\n" + bestIndividual);
             result.setFirst("Количество поколений: " + currentIteration + "\n\nЛучшее решение = " + currentBestFitness + "\n" + bestIndividual);
         }
 
@@ -198,9 +215,10 @@ public class GeneticAlgorithm {
     }
 
     private boolean exitCondition() {
-        if (Math.abs(previousBestFitness - currentBestFitness) < accuracy && Math.abs(previousBestFitness - currentBestFitness) != 0) {
-            return true;
-        } else if (iterationsWithoutImprovement == maxIterationsWithoutImprovement) {
+//        if (Math.abs(previousBestFitness - currentBestFitness) < accuracy && Math.abs(previousBestFitness - currentBestFitness) != 0) {
+//            return true;
+//        } else
+        if (iterationsWithoutImprovement == maxIterationsWithoutImprovement) {
             return true;
         } else if (currentIteration == maxIterations) {
             return true;

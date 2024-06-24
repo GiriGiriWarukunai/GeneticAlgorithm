@@ -9,4 +9,7 @@ public abstract class Mutation {
     protected int maxMutationAttempts = 100;
 
     public abstract Population mutation(Population population, double mutationRate) throws ScriptException;
+
+    public abstract Population mutation(Population population, double mutationRate, int first, int second) throws ScriptException;
+
 }

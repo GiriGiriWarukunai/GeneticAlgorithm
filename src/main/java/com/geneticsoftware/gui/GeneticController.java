@@ -99,6 +99,25 @@ public class GeneticController {
     @FXML
     private Button backButton;
 
+    @FXML
+    private TextField kTextField;
+
+    @FXML
+    private TextField firstTextField;
+
+    @FXML
+    private TextField secondTextField;
+
+    @FXML
+    private TextField alphaTextField;
+
+    @FXML
+    private TextField sizeTextField;
+
+    @FXML
+    private Button solutionButton1;
+
+
     private Scene scene;
     private Stage stage;
     private Parent root;
@@ -106,6 +125,12 @@ public class GeneticController {
 
     //@FXML
     public void initialize(String function, Integer countArguments, String[] min, String[] max) {
+
+        alphaTextField.setText("0");
+        kTextField.setText("1");
+        sizeTextField.setText("2");
+        firstTextField.setText("0");
+        secondTextField.setText("0");
 
         ObservableList<String> chromosome = FXCollections.observableArrayList(
                 "Бинарное кодирование",
@@ -204,45 +229,103 @@ public class GeneticController {
 
             GeneticAlgorithm geneticAlgorithm = null;
 
+
+
             double alpha = 0;
-            int k = 4;
-            int size = 4;
-
-            try {
-                geneticAlgorithm = new GeneticAlgorithm(
-                        populationSize,
-                        countChromosomes,
-                        accuracy,
-                        crossoverRate,
-                        mutationRate,
-                        maxIterations,
-                        maxIterationsWithoutImprovement,
-                        findMin,
-                        chromosomeType,
-                        selectionType,
-                        crossoverType,
-                        mutationType,
-                        elitist,
-                        fitnessFunction,
-
-                        size,
-                        alpha,
-                        k
-                );
-            } catch (ScriptException e) {
-                throw new RuntimeException(e);
+            if (alphaTextField.getText() != null){
+                alpha = Double.parseDouble(alphaTextField.getText());
             }
 
-            Pair<String, XYChart.Series<String, Double>> result = null;
-            try {
-                result = geneticAlgorithm.startAlgorithm();
-            } catch (ScriptException e) {
-                throw new RuntimeException(e);
+            int k = 1;
+            if (kTextField.getText() != null) {
+                k = Integer.parseInt(kTextField.getText());
             }
 
-            resultChart.setLegendVisible(false);
-            resultLabel.setText("Результат:\n" + result.getFirst());
-            resultChart.getData().add(result.getSecond());
+            int size = 2;
+            if(sizeTextField.getText() != null) {
+                size = Integer.parseInt(sizeTextField.getText());
+            }
+
+            int first = 0;
+            if(firstTextField.getText() != null) {
+                first = Integer.parseInt(firstTextField.getText());
+            }
+
+            int second = 0;
+            if (secondTextField.getText() != "") {
+                second = Integer.parseInt(secondTextField.getText());
+            }
+
+            double sumRes = 0;
+            double sumError = 0;
+            double sumDis = 0;
+            //int sumIterations = 0;
+            int iterations = 1;
+            double etalon = 0.0;
+            double [] results = new double[iterations];
+
+            for(int i = 0; i < iterations; i++) {
+                resultChart.getData().clear();
+                System.out.println(i);
+                try {
+                    geneticAlgorithm = new GeneticAlgorithm(
+                            populationSize,
+                            countChromosomes,
+                            accuracy,
+                            crossoverRate,
+                            mutationRate,
+                            maxIterations,
+                            maxIterationsWithoutImprovement,
+                            findMin,
+                            chromosomeType,
+                            selectionType,
+                            crossoverType,
+                            mutationType,
+                            elitist,
+                            fitnessFunction,
+
+                            size,
+                            alpha,
+                            k,
+                            first,
+                            second
+                    );
+                } catch (ScriptException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Pair<String, XYChart.Series<String, Double>> result = null;
+                try {
+                    result = geneticAlgorithm.startAlgorithm();
+                } catch (ScriptException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+                resultChart.setLegendVisible(false);
+                resultLabel.setText("Результат:\n" + result.getFirst());
+                resultChart.getData().add(result.getSecond());
+
+
+                results[i] = result.getSecond().getData().getLast().getYValue();
+                sumRes += result.getSecond().getData().getLast().getYValue();
+                //sumIterations += Integer.parseInt(result.getSecond().getData().getLast().getXValue()) - maxIterationsWithoutImprovement;
+                sumError += Math.abs(result.getSecond().getData().getLast().getYValue() - etalon);
+
+            }
+
+            sumError = sumError / (double) iterations;
+            sumRes = sumRes / (double) iterations;
+            for (int j = 0; j < iterations; j++){
+                System.out.println(results[j]);
+                sumDis += Math.pow(results[j] - sumRes, 2);
+            }
+            sumDis = sumDis / (double) iterations;
+
+//            resultLabel.setText("Среднее лучшее решение: " + sumRes +
+//                    /*"\nСреднее количество поколений: " + ((double)sumIterations / (double)iterations)*/
+//                    "\nСредняя ошибка: " + sumError +
+//                    "\nДисперсия: " + sumDis);
 
         });
 

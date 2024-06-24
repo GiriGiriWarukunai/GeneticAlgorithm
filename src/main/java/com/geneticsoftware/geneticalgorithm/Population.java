@@ -158,39 +158,6 @@ public class Population {
         return res;
     }
 
-
-    private ArrayList<Individual> selectParentsByRouletteWheel() {
-        Random random = new Random();
-        double totalFitness = calculateTotalFitness();
-        double[] wheelSectors = new double[individuals.length];
-
-        wheelSectors[0] = (fitness.get(individuals[0])) / totalFitness;
-
-        StringBuilder str = new StringBuilder("сектора рулетки: " + wheelSectors[0]);
-
-        for (int i = 1; i < individuals.length - 1; i++){
-            wheelSectors[i] = wheelSectors[i - 1] + fitness.get(individuals[i]) / totalFitness;
-
-            str.append(" ").append(wheelSectors[i]);
-
-        }
-        wheelSectors[individuals.length - 1] = 1.0;
-
-        str.append(" ").append(wheelSectors[individuals.length - 1]);
-//        System.out.println(str + "\nродители:");
-
-        ArrayList<Individual> parents = new ArrayList<Individual>();
-        for (int i = 0; i < individuals.length; i++){
-            double wheelPosition = random.nextDouble();
-            int j;
-            for(j = 0; wheelSectors[j] < wheelPosition; j++);
-            parents.add(individuals[j]);
-
-//            System.out.println(individuals[j].toString());
-        }
-        return parents;
-    }
-
     public double calculateTotalFitness() {
         double totalFitness = 0;
         if(fitness.isEmpty()){

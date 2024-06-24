@@ -98,6 +98,7 @@ public class FunctionController {
         ObservableList<String> presets = FXCollections.observableArrayList(
                 "<не выбрано>",
                 "Функция Растригина",
+                "Функция Розенброка",
                 "Функция Била",
                 "Функция Гольдшейна-Прайса",
                 "Функция \"подставка для яиц\" (Eggholder function)"
@@ -315,7 +316,38 @@ public class FunctionController {
                 functionTextField.setText("10 * 2 + Math.pow(x1, 2) - 10 * Math.cos(2 * Math.PI * x1) + Math.pow(x2, 2) - 10 * Math.cos(2 * Math.PI * x2)");
 
                 break;
-            case ("Функция Била"):
+
+            case ("Функция Розенброка"):
+
+                finalMax = new String[2];
+                finalMax[0] = "100000";
+                finalMax[1] = "100000";
+                finalMin = new String[2];
+                finalMin[0] = "-100000";
+                finalMin[1] = "-100000";
+
+                if(isNoneBefore) {
+                    if (minTextField.getText() != null) {
+                        userMin.set(Integer.parseInt(lastArg.replace("x", "")) - 1, minTextField.getText());
+                    } else {
+                        userMin.set(Integer.parseInt(lastArg.replace("x", "")) - 1, "");
+                    }
+                    if (maxTextField.getText() != null) {
+                        userMax.set(Integer.parseInt(lastArg.replace("x", "")) - 1, maxTextField.getText());
+                    } else {
+                        userMax.set(Integer.parseInt(lastArg.replace("x", "")) - 1, "");
+                    }
+                }
+
+                valueFactory.setValue(0);
+                isNoneBefore = false;
+                valueFactory.setValue(2);
+
+                functionTextField.setText("100 * Math.pow(x2 - Math.pow(x1, 2), 2) + Math.pow(x1 - 1, 2)");
+
+                break;
+
+                case ("Функция Била"):
 
                 finalMax = new String[2];
                 finalMax[0] = "4.5";

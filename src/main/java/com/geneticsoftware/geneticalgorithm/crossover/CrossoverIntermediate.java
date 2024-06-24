@@ -56,13 +56,13 @@ public class CrossoverIntermediate extends Crossover {
                     for (int j = 0; j < parent1.getChromosomes()[0].getChromosomeSize(); j++) {
                         double p1 = parent1.getChromosomes()[0].getChromosome()[j];
                         double p2 = parent2.getChromosomes()[0].getChromosome()[j];
-                        if(p1 > p2){
+                        if (p1 > p2) {
                             double tmp = p1;
                             p1 = p2;
                             p2 = tmp;
                         }
 
-                        double a = -alpha + (1+alpha - -alpha) * random.nextDouble();
+                        double a = -alpha + (1 + alpha - -alpha) * random.nextDouble();
 
                         child1[j] = p1 * a + p2 * (1 - a);
                         child2[j] = p2 * a + p1 * (1 - a);
@@ -97,15 +97,16 @@ public class CrossoverIntermediate extends Crossover {
             i += 2;
         }
 
-//        for (Individual individual : offspring) {
-//            double[] tmp = individual.getBinaryStringFromChromosomes().binaryStringToDouble();
-//            for (Double j : tmp) {
-//                if (j.isNaN()) {
-//                    System.out.println("NANANANANAAANNANANNAANANANANANANNANANNANANA");
-//                    System.exit(0);
-//                }
-//            }
-//        }
+        Individual[] tmp2 = offspring;
+        for (Individual j : tmp2) {
+            for (int l = 0; l < j.getChromosomes()[0].getChromosomeSize(); l++) {
+                if (((Double) j.getChromosomes()[0].getChromosome()[l]).isNaN()) {
+                    System.out.println("NANANANANAAANNANANNAANANANANANANNANANNANANA");
+                    System.exit(0);
+                }
+            }
+        }
+
 
         return new Population(offspring, fitnessFunction);
     }

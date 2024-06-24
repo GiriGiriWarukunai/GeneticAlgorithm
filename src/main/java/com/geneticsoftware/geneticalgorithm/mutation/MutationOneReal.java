@@ -14,25 +14,13 @@ public class MutationOneReal extends Mutation {
     public Population mutation(Population population, double mutationRate) throws ScriptException {
         Population res = new Population(population);
         for (int i = 0; i < res.getIndividuals().length; i++) {
-            Individual individual = new Individual();
             double[] tmpChromosome = new double[res.getIndividuals()[i].getChromosomes()[0].getChromosomeSize()];
-//            Chromosome[] tmp = new Chromosome[res.getIndividuals()[i].getCountChromosomes()];
             int mutationAttempts = 0;
             do {
-//                for (int j = 0; j < res.getIndividuals()[i].getCountChromosomes(); j++) {
-
                 tmpChromosome = res.getIndividuals()[i].getChromosomes()[0].getChromosome();
                 Random random = new Random();
                 if (random.nextDouble() < mutationRate) {
                     int idx = random.nextInt(res.getIndividuals()[i].getChromosomes()[0].getChromosomeSize()/* - 1*/);
-
-
-//                    String pyScript = "random.triangular(" + population.getFitnessFunction().getMinArgument()[idx] + ", " + population.getFitnessFunction().getMaxArgument()[idx] + ", random.gauss(" + tmpChromosome[idx] + ", sigma))";
-////                    String pyScript = "print \"UWU\"";
-//
-//                    ScriptEngineManager manager = new ScriptEngineManager();
-//                    ScriptEngine engine = manager.getEngineByName("jython");
-//                    double newGen = ((Number) engine.eval(pyScript)).doubleValue();
 
                     double d = 0;
                     if (tmpChromosome[idx] - population.getFitnessFunction().getMinArgument()[idx] > population.getFitnessFunction().getMaxArgument()[idx] - tmpChromosome[idx]){
@@ -45,8 +33,6 @@ public class MutationOneReal extends Mutation {
                     //double newGen = population.getFitnessFunction().getMinArgument()[idx] + (population.getFitnessFunction().getMaxArgument()[idx] - population.getFitnessFunction().getMinArgument()[idx]) * random.nextDouble();
                     tmpChromosome[idx] = gaussianRandom;
                 }
-//               }
-
                 // System.out.println("Временная хромосома в мутации: " + tmp);
                 // System.out.println("Итоговая хромосома после мутации: " + chromosomes[i] + "\n");
                 mutationAttempts++;
@@ -56,6 +42,11 @@ public class MutationOneReal extends Mutation {
             if (mutationAttempts < maxMutationAttempts && res.getIndividuals()[0].checkChromosomes(tmpChromosome, res.getFitnessFunction())) {
                 Chromosome[] tmp = new Chromosome[1];
                 tmp[0] = new Chromosome(tmpChromosome);
+                res.getIndividuals()[i].setChromosomes(tmp);
+            }
+            else {
+                Chromosome[] tmp = new Chromosome[1];
+                tmp[0] = new Chromosome(population.getIndividuals()[i].getChromosomes()[0]);
                 res.getIndividuals()[i].setChromosomes(tmp);
             }
 //            System.out.println("Особь после мутации: " + individuals[i] + "\n");
@@ -73,5 +64,10 @@ public class MutationOneReal extends Mutation {
 
         res.calculateFitness(res.getFitnessFunction());
         return res;
+    }
+
+    @Override
+    public Population mutation(Population population, double mutationRate, int first, int second) throws ScriptException {
+        return null;
     }
 }

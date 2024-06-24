@@ -94,15 +94,15 @@ public class CrossoverLine extends Crossover{
             i += 2;
         }
 
-//        for (Individual individual : offspring) {
-//            double[] tmp = individual.getBinaryStringFromChromosomes().binaryStringToDouble();
-//            for (Double j : tmp) {
-//                if (j.isNaN()) {
-//                    System.out.println("NANANANANAAANNANANNAANANANANANANNANANNANANA");
-//                    System.exit(0);
-//                }
-//            }
-//        }
+        Individual[] tmp2 = offspring;
+        for (Individual j : tmp2) {
+            for (int l = 0; l < j.getChromosomes()[0].getChromosomeSize(); l++) {
+                if (((Double) j.getChromosomes()[0].getChromosome()[l]).isNaN()) {
+                    System.out.println("NANANANANAAANNANANNAANANANANANANNANANNANANA");
+                    System.exit(0);
+                }
+            }
+        }
 
         return new Population(offspring, fitnessFunction);
     }
